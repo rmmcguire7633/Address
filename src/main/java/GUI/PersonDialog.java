@@ -33,50 +33,64 @@ public class PersonDialog extends JDialog {
         AtomicReference<JPanel> p = new AtomicReference<>(new JPanel(new SpringLayout()));
 
         l = new JLabel("First name:", JLabel.TRAILING);
+        l.setName("firstNameLabel");
         p.get().add(l);
         firstName = new JTextField(20);
+        firstName.setName("firstNameTextBox");
         l.setLabelFor(firstName);
         p.get().add(firstName);
 
       
-        l = new JLabel("Last name:", JLabel.TRAILING);
-        p.get().add(l);
+        JLabel llastName = new JLabel("Last name:", JLabel.TRAILING);
+        p.get().add(llastName);
+        llastName.setName("lastNameLabel");
         lastName = new JTextField(20);
-        l.setLabelFor(lastName);
+        lastName.setName("lastNameTextBox");
+        llastName.setLabelFor(lastName);
         p.get().add(lastName);
 
   
-        l = new JLabel("Address:", JLabel.TRAILING);
-        p.get().add(l);
+        JLabel lAddress = new JLabel("Address:", JLabel.TRAILING);
+        p.get().add(lAddress);
+        lAddress.setName("addressLabel");
         address = new JTextField(20);
-        l.setLabelFor(address);
+        address.setName("addressTextBox");
+        lAddress.setLabelFor(address);
         p.get().add(address);
 
-     
-        l = new JLabel("City:", JLabel.TRAILING);
-        p.get().add(l);
+
+        JLabel lCity = new JLabel("City:", JLabel.TRAILING);
+        p.get().add(lCity);
+        lCity.setName("cityLabel");
         city = new JTextField(20);
-        l.setLabelFor(city);
+        city.setName("cityTextBox");
+        lCity.setLabelFor(city);
         p.get().add(city);
 
-       
-        l = new JLabel("State:", JLabel.TRAILING);
-        p.get().add(l);
+
+        JLabel lState = new JLabel("State:", JLabel.TRAILING);
+        p.get().add(lState);
+        lState.setName("stateLabel");
         state = new JTextField(20);
+        state.setName("stateTextBox");
         l.setLabelFor(state);
         p.get().add(state);
 
-        l = new JLabel("ZIP code:", JLabel.TRAILING);
-        p.get().add(l);
+        JLabel lZIP = new JLabel("ZIP code:", JLabel.TRAILING);
+        p.get().add(lZIP);
+        lZIP.setName("zipLabel");
         zip = new JTextField(20);
-        l.setLabelFor(zip);
+        zip.setName("zipTextBox");
+        lZIP.setLabelFor(zip);
         p.get().add(zip);
 
-       
-        l = new JLabel("Telephone:", JLabel.TRAILING);
-        p.get().add(l);
+
+        JLabel lTelephone = new JLabel("Telephone:", JLabel.TRAILING);
+        p.get().add(lTelephone);
+        lTelephone.setName("telephoneLabel");
         phone = new JTextField(20);
-        l.setLabelFor(phone);
+        phone.setName("phoneTextBox");
+        lTelephone.setLabelFor(phone);
         p.get().add(phone);
 
         
@@ -85,6 +99,7 @@ public class PersonDialog extends JDialog {
         // Set up the buttons
         JPanel buttons = new JPanel();
         JButton okButton = new JButton("OK");
+        okButton.setName("okButton");
         okButton.setMnemonic('O');
         okButton.addActionListener(e ->
         {
