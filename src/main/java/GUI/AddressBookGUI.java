@@ -47,19 +47,22 @@ public class AddressBookGUI extends JFrame {
     private final JTextField searchTextField = new JTextField("");
 
     private File currentFile = null;
-
    
     public AddressBookGUI(AddressBookController controller, AddressBook addressBook) {
         // Set our local variables
         this.controller = controller;
         this.addressBook = addressBook;
         this.addButton.setName("add");
+        this.editButton.setName("edit");
+        this.deleteButton.setName("delete");
+        this.searchTextField.setName("search");
 
         // Arrange the window controls
         tableRowSorter = new TableRowSorter<>(addressBook);
         nameList = new JTable(addressBook);
         nameList.setRowSorter(tableRowSorter);
         nameList.setFillsViewportHeight(true);
+        nameList.setName("tableView");
         JScrollPane scrollPane = new JScrollPane(nameList);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
 
