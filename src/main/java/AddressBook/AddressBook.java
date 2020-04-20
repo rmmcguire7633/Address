@@ -46,7 +46,9 @@ public class AddressBook extends AbstractTableModel {
      * Clears this address book.
      */
     public void clear() {
-        if (persons == null || persons.size() == 0) {
+        if (persons == null) {
+            return;
+        } else if (persons.size() == 0) {
             return;
         }
         fireTableRowsDeleted(0, persons.size() - 1);
