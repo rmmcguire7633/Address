@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class PersonTest {
 
     private static Person p1 = new Person("Homer", "Simpson", "1234 springfield", "Fort Myers",
-            "FL", "12345","1234567890");
+            "FL", "12345","2391111111");
 
     private static Person p2 = new Person("119", "879", "58999", "6778",
-            "589", "890","phoneNumber");
+            "589", "85789","2391111112");
 
     private static Person p3 = new Person("###", "####", "#12#", "#239#",
-            "#$", "##5", "##%%%");
+            "#$", "56324", "2391111113");
 
     private static Person personWithNullValues = new Person("Ryan", "McGuire", null, null,
             null, null, null);
@@ -90,7 +90,39 @@ class PersonTest {
         assertTrue(actualException.contains(expectedException));
     }
 
-    // since we allready checked if the first name is null in our previous test,
+    // this test is using boundary testing by testing at the boundary of 5 to make sure it fails
+    // also test negative input that should throw an exception
+    @ParameterizedTest
+    @MethodSource("GetInvalidDataForPersonZipTest")
+    void Person_Should_Throw_IllegalArgumentException_If_Zip_Is_Not_Five_Character_Long_is_Negative(String zip) {
+        assertThrows(IllegalArgumentException.class, () -> new Person("CoolKid", "Ryan", "",
+                "", "", zip, ""));
+    }
+
+    private static Stream<Arguments> GetInvalidDataForPersonZipTest() {
+        return Stream.of(
+                Arguments.of("1234"),
+                Arguments.of("123456"),
+                Arguments.of("-1")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("GetInvalidDataForPersonPhoneTest")
+    void Person_Should_Throw_IllegalArgument_If_Phone_Is_Not_Ten_Characters_Long_Or_Is_Negative(String phone) {
+        assertThrows(IllegalArgumentException.class, () -> new Person("CoolKid", "McGuire", ""
+        , "", "", "", phone));
+    }
+
+    private static Stream<Arguments> GetInvalidDataForPersonPhoneTest() {
+        return Stream.of(
+                Arguments.of("123456789"),
+                Arguments.of("12345678911"),
+                Arguments.of("-1")
+        );
+    }
+
+    // since we all ready checked if the first name is null in our previous test,
     // we just need to see if this method returns the right input
     @ParameterizedTest
     @MethodSource("getValidNamesForGetFirstName")
@@ -225,8 +257,8 @@ class PersonTest {
     private static Stream<Arguments> GetValidNamesThatAreNotEmptyOrNullForZip(){
         return Stream.of(
                 Arguments.of(p1, "12345"),
-                Arguments.of(p2, "890"),
-                Arguments.of(p3, "##5")
+                Arguments.of(p2, "85789"),
+                Arguments.of(p3, "56324")
         );
     }
 
@@ -244,6 +276,12 @@ class PersonTest {
         assertEquals("", zip);
     }
 
+    @Test
+    void getZip_Should_Throw_IllegalArguemntException_If_Letters_are_In_Zip_Code() {
+        assertThrows(IllegalArgumentException.class, () -> new Person("Ryan", "McGuire", "",
+                "", "", "abcde", ""));
+    }
+
     @ParameterizedTest
     @MethodSource("GetValidNamesThatAreNotEmptyOrNullForPhone")
     void getPhone_Should_return_Phone_When_There_Is_A_Phone(Person person, String expected) {
@@ -254,9 +292,9 @@ class PersonTest {
 
     private static Stream<Arguments> GetValidNamesThatAreNotEmptyOrNullForPhone(){
         return Stream.of(
-                Arguments.of(p1, "1234567890"),
-                Arguments.of(p2, "phoneNumber"),
-                Arguments.of(p3, "##%%%")
+                Arguments.of(p1, "2391111111"),
+                Arguments.of(p2, "2391111112"),
+                Arguments.of(p3, "2391111113")
         );
     }
 
@@ -290,7 +328,7 @@ class PersonTest {
                 Arguments.of(3, "Fort Myers"),
                 Arguments.of(4, "FL"),
                 Arguments.of(5, "12345"),
-                Arguments.of(6, "1234567890")
+                Arguments.of(6, "2391111111")
         );
     }
 

@@ -159,6 +159,7 @@ class AddressBookTest {
         assertEquals(0, addressBook.getPersons().length);
     }
 
+    // we use parameterized testing to take in a a range of persons from empty to 3
     @ParameterizedTest
     @MethodSource("GetValidPersonsForGetTest")
     void get_Should_Return_The_Specific_Person_In_The_AddressBook(int[] index, Person[] expectedPerson) {

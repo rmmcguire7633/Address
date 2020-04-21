@@ -20,7 +20,7 @@ public class FileSystemTest {
     private File filepath = new File("FakeDB.db");
 
     @Test
-    void readFile_Should_Throw_FileNotFoundException_With_Incorrect_FilePath_That_does_Not_Exist() throws FileNotFoundException, SQLException {
+    void readFile_Should_Throw_FileNotFoundException_With_Incorrect_FilePath_That_does_Not_Exist() {
         File filepath = new File("thisIsNotAPAth");
 
         assertThrows(FileNotFoundException.class, () -> {fs.readFile(addressBook, filepath);});
@@ -35,7 +35,7 @@ public class FileSystemTest {
     @Test
     void saveFile_Should_Save_Person_class_in_addressBook() throws SQLException, FileNotFoundException {
         Person person = new Person("Ryan", "McGuire", "123 8th street", "Fort Myers",
-                "FL", "33605", "8675309");
+                "FL", "33605", "2391111111");
 
         addressBook.add(person);
 
@@ -53,7 +53,7 @@ public class FileSystemTest {
         assertEquals("Fort Myers", personarray[0].getCity());
         assertEquals("FL", personarray[0].getState());
         assertEquals("33605", personarray[0].getZip());
-        assertEquals("8675309", personarray[0].getPhone());
+        assertEquals("2391111111", personarray[0].getPhone());
 
         // make sure there was only one person added
         int count = 0;

@@ -24,7 +24,9 @@ public class Person {
     private String zip;
     private String phone;
 
- 
+
+    // here we had a few test failed
+    //
     public Person(String firstName, String lastName, String address, String city, String state, String zip, String phone) {
         if (firstName == null || firstName.isEmpty())
             throw new IllegalArgumentException("First name cannot be empty");
@@ -35,8 +37,33 @@ public class Person {
         this.address = address;
         this.city = city;
         this.state = state;
-        this.zip = zip;
-        this.phone = phone;
+
+        // This bug was found we ran a test where the person zip code was letters
+        // checks to see if the zip is null, if it is set it to empty string
+        if (zip == null) {
+            this.zip = null;
+        }
+        else {
+            // checks to see if the zip code is numbers and 5 characters long
+            if (!zip.matches("^[0-9]{5}") && !zip.isEmpty()) {
+                throw new IllegalArgumentException("Zip code must be numbers and must be 5 charters long");
+            } else {
+                this.zip = zip;
+            }
+        }
+
+        // This bug was found when we ran a test where we passed in letters for the phone number
+        // checks to see if phone is null
+        if (phone == null) {
+            this.phone = null;
+        } else {
+            // checks to make sure phone is a number and is 10 characters long
+            if (!phone.matches("^[0-9]{10}") && !phone.isEmpty()) {
+                throw new IllegalArgumentException("Phone must be numbers and must be 10 characters long");
+            } else {
+                this.phone = phone;
+            }
+        }
     }
 
 
