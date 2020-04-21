@@ -28,7 +28,7 @@ public class AddressBookControllerTest {
     // Making sure we can set the constructor
     @Test
     void AddressBookController_Constructor_Should_Be_Set_To_AddressBook_Passed_In () {
-        AddressBookController addressBookController = new AddressBookController(addressBook);
+        assertDoesNotThrow(() -> new AddressBookController(addressBook));
     }
 
     // here we use the addressBook that was passed into the controller to see if the controller added the persons
